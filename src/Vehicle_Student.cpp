@@ -28,8 +28,9 @@ void Vehicle::simulate()
 {
     // Task L1.2 : Start a thread with the member function „drive“ and the object „this“ as the launch parameters. 
     // Also, add the created thread into the _thread vector of the parent class. 
+    //_threads.emplace_back(std::thread(&Vehicle::drive, this));
     std::thread t(&Vehicle::drive, this);
-    TrafficObject::_threads.emplace_back(t); //emplace_back uses move semantics
+    TrafficObject::_threads.emplace_back(std::move(t)); //emplace_back uses move semantics
 }
 
 // virtual function which is executed in a thread
